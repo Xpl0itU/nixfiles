@@ -12,10 +12,26 @@
 
   # Use latest kernel release
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  # Kabylake boot optimizations
+  boot.initrd.kernelModules = [ "i915" ];
+  environment.variables = {
+    VDPAU_DRIVER = "va_gl";
+  };
+  boot.kernelParams = [
+    "i915.enable_fbc=1"
+    "i915.enable_psr=2"
+  ];
+  
+  # Microcode updating
+  hardware.cpu.intel.updateMicrocode = config.hardware.enableRedistributableFirmware;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  # Enable trim
+  services.fstrim.enable = true;
 
   # Ignore Lid close
   services.logind.lidSwitch = "ignore";
