@@ -94,6 +94,7 @@
       enable = true;
       settings.General = {
         Enable = "Source,Sink,Media,Socket";
+        ControllerMode = "bredr";
       };
     };
   };
@@ -138,6 +139,10 @@
     gnome.nautilus
     joycond
     gnome.gedit
+    gnome.file-roller
+    # paprefs
+    # pavucontrol
+    # pulseaudioFull
   ];
 
   # Enable joycond
